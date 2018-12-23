@@ -1,12 +1,12 @@
 [ 		{
             "name": "茶叶及其相关制品",
-			"type": "foot"
+			"type": "food"
         }, {
             "name": "糕点",
-			"type": "foot"
+			"type": "food"
         }, {
             "name": "蜂产品",
-			"type": "foot"
+			"type": "food"
         }, {
             "name": "嗜渗酵母计数",
 			"type": "testItem"

@@ -8,36 +8,74 @@
     </el-col>
     <el-col :span="12">
         <div class="formBox">
-            <el-form ref="form" :model="search" label-width="120px" size="mini" label-position="left">
-            <el-form-item label="抽检不合格频次">
-                <el-slider
-                v-model="search.frequency"
-                range
-                show-stops
-                :max="frequencyMax">
-            </el-slider>
-            </el-form-item>
-            <el-form-item label="食品&检测项">
-                <el-select v-model="search.searchKeys" multiple placeholder="请选择">
-                    <el-option-group
-                    v-for="group in selectOptions"
-                    :key="group.label"
-                    :label="group.label">
-                    <el-option
-                        v-for="item in group.options"
+            <el-form ref="form" :model="search" label-width="120px" size="mini" label-position="left" >
+                <el-form-item label="抽检不合格频次">
+                    <el-slider
+                    v-model="search.frequency"
+                    range
+                    show-stops
+                    :max="frequencyMax">
+                </el-slider>
+                </el-form-item>
+                <el-form-item label="食品&检测项">
+                    <el-select v-model="search.searchKeys" multiple placeholder="请选择">
+                        <el-option-group
+                        v-for="group in selectOptions"
+                        :key="group.label"
+                        :label="group.label">
+                        <el-option
+                            v-for="item in group.options"
+                            :key="item.value"
+                            :label="item.label"
+                            :value="item.value">
+                        </el-option>
+                        </el-option-group>
+                    </el-select>
+                </el-form-item>
+                <el-form-item label="开启抽检地图"> 
+                    <el-switch
+                    v-model="mapShow">
+                    </el-switch>
+                </el-form-item>
+                <el-form-item v-show="mapShow" label="食品"> 
+                    <el-select v-model="search.food" placeholder="请选择">
+                        <el-option
+                        v-for="item in foods"
                         :key="item.value"
                         :label="item.label"
                         :value="item.value">
-                    </el-option>
-                    </el-option-group>
-                </el-select>
-            </el-form-item>
-            <el-form-item size="large">
-                <el-button type="primary" @click="onSubmit">生成图表</el-button>
-                <el-button>取消</el-button>
-            </el-form-item>
-        </el-form>
+                        </el-option>
+                    </el-select>
+                </el-form-item>
+                <el-form-item v-show="mapShow" label="检测项"> 
+                    <el-select v-model="search.checkItem" placeholder="请选择">
+                        <el-option
+                        v-for="item in checkItems"
+                        :key="item.value"
+                        :label="item.label"
+                        :value="item.value">
+                        </el-option>
+                    </el-select>
+                </el-form-item>
+                <el-form-item v-show="mapShow" label="检测日期"> 
+                    <el-date-picker
+                    v-model="search.date"
+                    type="daterange"
+                    align="right"
+                    unlink-panels
+                    range-separator="至"
+                    start-placeholder="开始日期"
+                    end-placeholder="结束日期"
+                    :picker-options="pickerOptions2">
+                    </el-date-picker>
+                </el-form-item>
+                <el-form-item size="small">
+                    <el-button type="primary" @click="onSubmit">生成图表</el-button>
+                    <el-button>取消</el-button>
+                </el-form-item>
+            </el-form>
         </div>
+        <div id='mainMap' style="width: 100%;height: 500px"></div>
     </el-col>
   </el-row>
 </template>
@@ -51,6 +89,7 @@ export default {
         return {
             myChart:"",  
             myChart3D:"",  
+            myChartMap:"", 
             graph: {},
             categories: [1,2],
             option: {
@@ -108,10 +147,16 @@ export default {
                 label: '检测项',
                 options:[]
             }],
+            checkItems: [],
+            foods: [],
             search: {
                 frequency: [0,0],
-                searchKeys: ""
+                searchKeys: "",
+                checkItem: "",
+                food: "",
+                data: []
             },
+            pickerOptions2: "",
             frequencyMax : 0,
             option3D:  {
                 tooltip: {
@@ -181,7 +226,109 @@ export default {
                         }
                     }
                 }]
-            }
+            },
+
+            mapShow : false,
+
+            optionMap: {
+                backgroundColor: '#ffffff',
+                title: {
+                    text: '全国主要城市食品安全抽检',
+                    //subtext: 'data from PM25.in',
+                    //sublink: 'http://www.pm25.in',
+                    x:'center',
+                    textStyle: {
+                        color: '#000000'
+                    }
+                },
+                tooltip: {
+                    // trigger: 'item',
+                    formatter: function (params) {
+                        debugger
+                        return params.name + ' : ' + params.value;
+                    }
+                },
+                legend: {
+                    orient: 'vertical',
+                    y: 'bottom',
+                    x:'right',
+                    data:['pm2.5'],
+                    textStyle: {
+                        color: '#fff'
+                    }
+                },
+                visualMap: {
+                    min: 0,
+                    max: 200,
+                    // calculable: true,
+                    color: ['#d94e5d','#eac736','#50a3ba'],
+                    // textStyle: {
+                    //     color: '#fff'
+                    // }
+                },
+                geo: {
+                    map: 'china',
+                    label: {
+                        emphasis: {
+                            show: false
+                        }
+                    },
+                    itemStyle: {
+                        normal: {
+                            areaColor: '#84aab1',
+                            borderColor: '#111'
+                        },
+                        emphasis: {
+                            areaColor: '#2a333d'
+                        }
+                    }
+                },
+                series: [
+                    {
+                        name: 'categoryA',
+                        type: 'map',
+                        geoIndex: 0,
+                        // tooltip: {show: false},
+                        data:[
+                            {name: '北京', value: 0},
+                            {name: '天津', value: 0},
+                            {name: '上海', value: 0},
+                            {name: '重庆', value: 0},
+                            {name: '河北', value: 0},
+                            {name: '河南', value: 0},
+                            {name: '云南', value: 0},
+                            {name: '辽宁', value: 0},
+                            {name: '黑龙江', value: 0},
+                            {name: '湖南', value: 0},
+                            {name: '安徽', value: 0},
+                            {name: '山东', value: 0},
+                            {name: '新疆', value: 0},
+                            {name: '江苏', value: 0},
+                            {name: '浙江', value: 0},
+                            {name: '江西', value: 0},
+                            {name: '湖北', value: 0},
+                            {name: '广西', value: 0},
+                            {name: '甘肃', value: 0},
+                            {name: '山西', value: 0},
+                            {name: '内蒙古', value: 0},
+                            {name: '陕西', value: 0},
+                            {name: '吉林', value: 0},
+                            {name: '福建', value: 0},
+                            {name: '贵州', value: 0},
+                            {name: '广东', value: 0},
+                            {name: '青海', value: 0},
+                            {name: '西藏', value: 0},
+                            {name: '四川', value: 0},
+                            {name: '宁夏', value: 0},
+                            {name: '海南', value: 0},
+                            {name: '台湾', value: 0},
+                            {name: '香港', value: 0},
+                            {name: '澳门', value: 0},
+                            {name: '南海诸岛', value: 0}
+                        ]
+                    }
+                ]
+            },
         }
     },
     mounted () {
@@ -189,6 +336,7 @@ export default {
         // 基于准备好的dom，初始化echarts实例
         _this.myChart = echarts.init(document.getElementById('main'));
         _this.myChart3D = echarts.init(document.getElementById('main3D'));
+        _this.myChartMap = echarts.init(document.getElementById('mainMap'));
         //获取分类
         $.getJSON("static/data/categories.json",function(data){
             _this.categories = data;
@@ -213,13 +361,18 @@ export default {
             });
             _this.frequencyMax = parseInt(max);
             _this.search.frequency[1] = parseInt(max);
+            _this.optionMap.visualMap.max = parseInt(max);
             _this.initEchart(_this.graph.nodes,_this.graph.links);
         }, 'xml');
         //渲染下拉列表
         $.getJSON("static/data/selectData.json",function(data){
             data.forEach(function(e,index){
-                if(e.type=="foot"){
+                if(e.type=="food"){
                     _this.selectOptions[0].options.push({
+                        value: e.name,
+                        label: e.name
+                    });
+                    _this.foods.push({
                         value: e.name,
                         label: e.name
                     });
@@ -228,6 +381,10 @@ export default {
             data.forEach(function(e){
                 if(e.type=="testItem"){
                     _this.selectOptions[1].options.push({
+                        value: e.name,
+                        label: e.name
+                    });
+                    _this.checkItems.push({
                         value: e.name,
                         label: e.name
                     });
@@ -308,6 +465,10 @@ export default {
             this.option.title.subtext = subText ? "与"+subText+"有关且抽检不合格频次"+frequency+"的数据" : "全部数据",
             // myChart.showLoading();
             this.initEchart3D(nodes,links);
+            if(this.mapShow){
+                this.initEchartMap(nodes,links);
+            }
+            
             this.myChart.setOption(this.option);
             //预留分类点击事件
             // myChart.on("legendselectchanged", function (param) {
@@ -353,6 +514,36 @@ export default {
                 return param.marker+" 食品检测信息表<br>-食品 : "+yLabel[param.data.value[1]]+"<br>-检测项 : "+xLabel[param.data.value[0]]+"<br>-检测不合格频次 : "+param.data.value[2]
             }
             this.myChart3D.setOption(this.option3D);
+        },
+
+        initEchartMap: function(nodes,links){
+            debugger
+            var _this = this;
+            var foodId = "";
+            var checkItemId = "";
+            nodes.forEach(function(node){
+                if(node.name == _this.search.food){
+                    foodId = node.id;
+                }
+                if(node.name == _this.search.checkItem){
+                    checkItemId = node.id;
+                }
+            });
+            links.forEach(function(link){
+                debugger
+                if(link.source == foodId && link.target == checkItemId){
+                    debugger
+                    link.options.forEach(function(option){
+                        debugger
+                        _this.optionMap.series[0].data.forEach(function(e){
+                            if(e.name == option.label){
+                                e.value = option.value;
+                            }
+                        });
+                    })
+                }
+            });
+            this.myChartMap.setOption(this.optionMap);
         },
 
         //搜索框功能
@@ -403,9 +594,9 @@ export default {
 
 <style>
 .formBox {
-    height: 1000px;
+    height: 500px;
     width: 50%;
     text-align: center;
-    margin: 200px auto;
+    margin: auto;
 }
 </style>
