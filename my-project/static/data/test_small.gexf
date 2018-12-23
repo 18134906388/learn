@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gexf xmlns="http://www.gexf.net/1.3" version="1.3" xmlns:viz="http://www.gexf.net/1.3/viz" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.gexf.net/1.3 http://www.gexf.net/1.3/gexf.xsd">
+  <meta lastmodifieddate="2018-12-17">
+    <creator>Gephi 0.9</creator>
+    <description></description>
+  </meta>
+  <graph defaultedgetype="directed" mode="static">
+	<attributes class="node" mode="static">
+      <attribute id="modularity_class" title="Modularity Class" type="integer"></attribute>
+    </attributes>
+    <nodes>
+      <node id="0" label="嗜渗酵母计数">
+            <attvalues>
+                                  <attvalue for="modularity_class" value="0"></attvalue>
+                                </attvalues>
+        <viz:size value="8.0"></viz:size>
+        <viz:position x="-430.66193" y="-292.16525"></viz:position>
+        <viz:color r="198" g="208" b="229"></viz:color>
+      </node>
+      <node id="1" label="茶叶及其相关制品">
+            <attvalues>
+                                  <attvalue for="modularity_class" value="1"></attvalue>
+                                </attvalues>
+        <viz:size value="10.0"></viz:size>
+        <viz:position x="246.37839" y="-481.3441"></viz:position>
+        <viz:position x="11.015282" y="181.69951"></viz:position>
+              <viz:color r="237" g="248" b="251"></viz:color>
+
+      </node>
+      <node id="2" label="草甘膦">
+            <attvalues>
+                                  <attvalue for="modularity_class" value="0"></attvalue>
+                                </attvalues>
+        <viz:size value="8.0"></viz:size>
+        <viz:position x="432.74768" y="-299.8657"></viz:position>
+        <viz:color r="198" g="208" b="229"></viz:color>
+      </node>
+      <node id="3" label="糕点">
+            <attvalues>
+                                  <attvalue for="modularity_class" value="2"></attvalue>
+                                </attvalues>
+        <viz:size value="10.0"></viz:size>
+        <viz:position x="111.26682" y="250.84875"></viz:position>
+        <viz:color r="172" g="182" b="215"></viz:color>
+      </node>
+      <node id="4" label="苯甲酸及其钠盐(以苯甲酸计)">
+            <attvalues>
+                                  <attvalue for="modularity_class" value="0"></attvalue>
+                                </attvalues>
+        <viz:size value="8.0"></viz:size>
+        <viz:position x="-116.39483" y="510.11768"></viz:position>
+        <viz:color r="198" g="208" b="229"></viz:color>
+      </node>
+      <node id="5" label="大肠菌群">
+            <attvalues>
+                                  <attvalue for="modularity_class" value="0"></attvalue>
+                                </attvalues>
+        <viz:size value="8.0"></viz:size>
+        <viz:position x="-163.12888" y="224.85158"></viz:position>
+        <viz:color r="198" g="208" b="229"></viz:color>
+      </node>
+      <node id="6" label="防腐剂混合使用时各自用量占其最大使用量的比例之和">
+            <attvalues>
+                                  <attvalue for="modularity_class" value="0"></attvalue>
+                                </attvalues>
+        <viz:size value="8.0"></viz:size>
+        <viz:position x="-483.71924" y="191.1033"></viz:position>
+        <viz:color r="198" g="208" b="229"></viz:color>
+      </node>
+      <node id="7" label="过氧化值(以脂肪计)">
+            <attvalues>
+                                  <attvalue for="modularity_class" value="0"></attvalue>
+                                </attvalues>
+        <viz:size value="8.0"></viz:size>
+        <viz:position x="529.87946" y="-71.13559"></viz:position>
+        <viz:color r="198" g="208" b="229"></viz:color>
+      </node>
+      <node id="8" label="菌落总数（CFU/g）">
+            <attvalues>
+                                  <attvalue for="modularity_class" value="0"></attvalue>
+                                </attvalues>
+        <viz:size value="8.0"></viz:size>
+        <viz:position x="-276.33173" y="-27.050598"></viz:position>
+        <viz:color r="198" g="208" b="229"></viz:color>
+      </node>
+      <node id="9" label="铝的残留量(干样品，以Al计)">
+            <attvalues>
+                                  <attvalue for="modularity_class" value="0"></attvalue>
+                                </attvalues>
+        <viz:size value="8.0"></viz:size>
+        <viz:position x="132.93576" y="521.98956"></viz:position>
+        <viz:color r="198" g="208" b="229"></viz:color>
+      </node>
+      <node id="10" label="霉菌">
+            <attvalues>
+                                  <attvalue for="modularity_class" value="0"></attvalue>
+                                </attvalues>
+        <viz:size value="8.0"></viz:size>
+        <viz:position x="0.21571784" y="-1.4471533"></viz:position>
+        <viz:color r="198" g="208" b="229"></viz:color>
+      </node>
+      <node id="11" label="山梨酸及其钾盐(以山梨酸计)">
+            <attvalues>
+                                  <attvalue for="modularity_class" value="0"></attvalue>
+                                </attvalues>
+        <viz:size value="8.0"></viz:size>
+        <viz:position x="498.82526" y="187.92567"></viz:position>
+        <viz:color r="198" g="208" b="229"></viz:color>
+      </node>
+      <node id="12" label="酸价(以脂肪计)">
+            <attvalues>
+                                  <attvalue for="modularity_class" value="0"></attvalue>
+                                </attvalues>
+        <viz:size value="8.0"></viz:size>
+        <viz:position x="355.71036" y="389.59235"></viz:position>
+        <viz:color r="198" g="208" b="229"></viz:color>
+      </node>
+      <node id="13" label="糖精钠(以糖精计)">
+            <attvalues>
+                                  <attvalue for="modularity_class" value="0"></attvalue>
+                                </attvalues>
+        <viz:size value="8.0"></viz:size>
+        <viz:position x="159.92838" y="-225.9067"></viz:position>
+        <viz:color r="198" g="208" b="229"></viz:color>
+      </node>
+      <node id="14" label="甜蜜素">
+            <attvalues>
+                                  <attvalue for="modularity_class" value="0"></attvalue>
+                                </attvalues>
+        <viz:size value="8.0"></viz:size>
+        <viz:position x="275.57968" y="27.157402"></viz:position>
+        <viz:color r="198" g="208" b="229"></viz:color>
+      </node>
+      <node id="15" label="脱氢乙酸及其钠盐(以脱氢乙酸计)">
+            <attvalues>
+                                  <attvalue for="modularity_class" value="0"></attvalue>
+                                </attvalues>
+        <viz:size value="8.0"></viz:size>
+        <viz:position x="-355.9976" y="410.2325"></viz:position>
+        <viz:color r="198" g="208" b="229"></viz:color>
+      </node>
+      <node id="16" label="蜂产品">
+            <attvalues>
+                                  <attvalue for="modularity_class" value="3"></attvalue>
+                                </attvalues>
+        <viz:size value="10.0"></viz:size>
+        <viz:position x="-117.34894" y="-253.13068"></viz:position>
+        <viz:color r="224" g="234" b="243"></viz:color>
+      </node>
+      <node id="17" label="果糖和葡萄糖">
+            <attvalues>
+                                  <attvalue for="modularity_class" value="0"></attvalue>
+                                </attvalues>
+        <viz:size value="8.0"></viz:size>
+        <viz:position x="-1.4467748" y="-521.60345"></viz:position>
+        <viz:color r="198" g="208" b="229"></viz:color>
+      </node>
+      <node id="18" label="氯霉素">
+            <attvalues>
+                                  <attvalue for="modularity_class" value="0"></attvalue>
+                                </attvalues>
+        <viz:size value="8.0"></viz:size>
+        <viz:position x="-541.05664" y="-60.39922"></viz:position>
+        <viz:color r="198" g="208" b="229"></viz:color>
+      </node>
+      <node id="19" label="霉菌计数">
+            <attvalues>
+                                  <attvalue for="modularity_class" value="0"></attvalue>
+                                </attvalues>
+        <viz:size value="8.0"></viz:size>
+        <viz:position x="-257.38092" y="-479.77026"></viz:position>
+        <viz:color r="198" g="208" b="229"></viz:color>
+      </node>
+
+    </nodes>
+    <edges>
+      <edge id="0" source="1" target="2" weight="3.0">
+        <option label="北京" value="3"></option>
+        <option label="河北" value="3"></option>
+        <option label="山西" value="3"></option>
+        <option label="-" value="-"></option>
+        <option label="标准含量" value="3mg"></option>
+        <option label="平均超标量" value="3mg"></option>
+      </edge>
+      <edge id="1" source="3" target="4"></edge>
+      <edge id="2" source="3" target="5" weight="2.0"></edge>
+      <edge id="3" source="3" target="6" weight="25.0"></edge>
+      <edge id="4" source="3" target="7" weight="6.0"></edge>
+      <edge id="5" source="3" target="8" weight="9.0"></edge>
+      <edge id="6" source="3" target="9"></edge>
+      <edge id="7" source="3" target="10" weight="10.0"></edge>
+      <edge id="8" source="3" target="11"></edge>
+      <edge id="9" source="3" target="12" weight="7.0"></edge>
+      <edge id="10" source="3" target="13" weight="2.0"></edge>
+      <edge id="11" source="3" target="14"></edge>
+      <edge id="12" source="3" target="15" weight="10.0"></edge>
+      <edge id="13" source="16" target="17" weight="2.0"></edge>
+      <edge id="14" source="16" target="8"></edge>
+      <edge id="15" source="16" target="18" weight="2.0"></edge>
+      <edge id="16" source="16" target="19"></edge>
+      <edge id="17" source="16" target="0" weight="2.0"></edge>
+      <edge id="18" source="16" target="13"></edge>
+    </edges>
+  </graph>
+</gexf>

@@ -1,0 +1,19 @@
+[ 		{
+            "name": "茶叶及其相关制品",
+			"type": "foot"
+        }, {
+            "name": "糕点",
+			"type": "foot"
+        }, {
+            "name": "蜂产品",
+			"type": "foot"
+        }, {
+            "name": "嗜渗酵母计数",
+			"type": "testItem"
+        }, {
+            "name": "草甘膦",
+			"type": "testItem"
+        }, {
+            "name": "苯甲酸及其钠盐(以苯甲酸计)",
+			"type": "testItem"
+        }]
