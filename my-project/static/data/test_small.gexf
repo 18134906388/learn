@@ -182,7 +182,11 @@
         <option label="标准含量" value="3mg"></option>
         <option label="平均超标量" value="3mg"></option>
       </edge>
-      <edge id="1" source="3" target="4"></edge>
+      <edge id="1" source="3" target="4">
+        <option label="北京" value="3"></option>
+        <option label="河北" value="3"></option>
+        <option label="山西" value="3"></option>
+      </edge>
       <edge id="2" source="3" target="5" weight="2.0"></edge>
       <edge id="3" source="3" target="6" weight="25.0"></edge>
       <edge id="4" source="3" target="7" weight="6.0"></edge>

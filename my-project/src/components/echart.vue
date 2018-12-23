@@ -9,15 +9,7 @@
     <el-col :span="12">
         <div class="formBox">
             <el-form ref="form" :model="search" label-width="120px" size="mini" label-position="left" >
-                <el-form-item label="抽检不合格频次">
-                    <el-slider
-                    v-model="search.frequency"
-                    range
-                    show-stops
-                    :max="frequencyMax">
-                </el-slider>
-                </el-form-item>
-                <el-form-item label="食品&检测项">
+                <el-form-item label="食品&检测项" class="formItem">
                     <el-select v-model="search.searchKeys" multiple placeholder="请选择">
                         <el-option-group
                         v-for="group in selectOptions"
@@ -32,32 +24,15 @@
                         </el-option-group>
                     </el-select>
                 </el-form-item>
-                <el-form-item label="开启抽检地图"> 
-                    <el-switch
-                    v-model="mapShow">
-                    </el-switch>
+                <el-form-item label="抽检不合格频次" class="formItem">
+                    <el-slider
+                    v-model="search.frequency"
+                    range
+                    show-stops
+                    :max="frequencyMax">
+                    </el-slider>
                 </el-form-item>
-                <el-form-item v-show="mapShow" label="食品"> 
-                    <el-select v-model="search.food" placeholder="请选择">
-                        <el-option
-                        v-for="item in foods"
-                        :key="item.value"
-                        :label="item.label"
-                        :value="item.value">
-                        </el-option>
-                    </el-select>
-                </el-form-item>
-                <el-form-item v-show="mapShow" label="检测项"> 
-                    <el-select v-model="search.checkItem" placeholder="请选择">
-                        <el-option
-                        v-for="item in checkItems"
-                        :key="item.value"
-                        :label="item.label"
-                        :value="item.value">
-                        </el-option>
-                    </el-select>
-                </el-form-item>
-                <el-form-item v-show="mapShow" label="检测日期"> 
+                <el-form-item label="检测日期" class="formItem"> 
                     <el-date-picker
                     v-model="search.date"
                     type="daterange"
@@ -69,7 +44,7 @@
                     :picker-options="pickerOptions2">
                     </el-date-picker>
                 </el-form-item>
-                <el-form-item size="small">
+                <el-form-item size="small" class="formItem">
                     <el-button type="primary" @click="onSubmit">生成图表</el-button>
                     <el-button>取消</el-button>
                 </el-form-item>
@@ -80,6 +55,26 @@
   </el-row>
 </template>
 <script>
+//                            _ooOoo_
+//                           o8888888o
+//                           88" . "88
+//                           (| -_- |)
+//                           O\  =  /O
+//                        ____/`---'\____
+//                      .'  \\|     |//  `.
+//                     /  \\|||  :  |||//  \
+//                    /  _||||| -:- |||||-  \
+//                    |   | \\\  -  /// |   |
+//                    | \_|  ''\---/''  |   |
+//                    \  .-\__  `-`  ___/-. /
+//                  ___`. .'  /--.--\  `. . __
+//               ."" '<  `.___\_<|>_/___.'  >'"".
+//              | | :  `- \`.;`\ _ /`;.`/ - ` : | |
+//              \  \ `-.   \_ __\ /__ _/   .-` /  /
+//         ======`-.____`-.___\_____/___.-`____.-'======
+//                            `=---='
+//        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+//                      Buddha Bless, No Bug !
 import echarts from 'echarts'
 import 'echarts-gl'
 import $ from 'jquery'
@@ -151,9 +146,7 @@ export default {
             foods: [],
             search: {
                 frequency: [0,0],
-                searchKeys: "",
-                checkItem: "",
-                food: "",
+                searchKeys: [],
                 data: []
             },
             pickerOptions2: "",
@@ -228,8 +221,6 @@ export default {
                 }]
             },
 
-            mapShow : false,
-
             optionMap: {
                 backgroundColor: '#ffffff',
                 title: {
@@ -244,7 +235,7 @@ export default {
                 tooltip: {
                     // trigger: 'item',
                     formatter: function (params) {
-                        debugger
+                        
                         return params.name + ' : ' + params.value;
                     }
                 },
@@ -347,7 +338,7 @@ export default {
         });
         //获取图表数据
         $.get('static/data/test_small.gexf', function (xml) {
-            debugger
+            
             console.log(echarts.dataTool);
             _this.graph = echarts.dataTool.gexf.parse(xml);
             _this.initNodes(_this.graph.nodes);
@@ -392,7 +383,7 @@ export default {
             });
         });
         _this.option.tooltip.formatter = function(params){
-            debugger
+            
             if(params.data.source){//判断是node还是link
                 var sourceName = "";
                 var targetName = "";
@@ -450,7 +441,7 @@ export default {
                     width : parseInt(width)/2
                 };
                 link.value = width;
-                link.frequency = width;
+                link.frequency = parseInt(width);
             });
         },
 
@@ -465,10 +456,7 @@ export default {
             this.option.title.subtext = subText ? "与"+subText+"有关且抽检不合格频次"+frequency+"的数据" : "全部数据",
             // myChart.showLoading();
             this.initEchart3D(nodes,links);
-            if(this.mapShow){
-                this.initEchartMap(nodes,links);
-            }
-            
+            this.initEchartMap(nodes,links);
             this.myChart.setOption(this.option);
             //预留分类点击事件
             // myChart.on("legendselectchanged", function (param) {
@@ -479,7 +467,7 @@ export default {
         },
 
         initEchart3D: function(nodes,links){
-            debugger
+            
             var xLabel = [];
             var xId = [];
             var yLabel = [];
@@ -510,7 +498,7 @@ export default {
                 }
             });
             this.option3D.tooltip.formatter = function(param){
-                debugger
+                
                 return param.marker+" 食品检测信息表<br>-食品 : "+yLabel[param.data.value[1]]+"<br>-检测项 : "+xLabel[param.data.value[0]]+"<br>-检测不合格频次 : "+param.data.value[2]
             }
             this.myChart3D.setOption(this.option3D);
@@ -519,25 +507,24 @@ export default {
         initEchartMap: function(nodes,links){
             debugger
             var _this = this;
-            var foodId = "";
-            var checkItemId = "";
+            var idList = [];
+            _this.optionMap.series[0].data.forEach(function(e){
+                e.value = 0;
+            });
             nodes.forEach(function(node){
-                if(node.name == _this.search.food){
-                    foodId = node.id;
-                }
-                if(node.name == _this.search.checkItem){
-                    checkItemId = node.id;
+                if( _this.search.searchKeys.indexOf(node.name)>=0 || !_this.search.searchKeys.length){
+                    idList.push(node.id);
                 }
             });
             links.forEach(function(link){
-                debugger
-                if(link.source == foodId && link.target == checkItemId){
-                    debugger
+                
+                if(idList.indexOf(link.source)>=0 && idList.indexOf(link.target)>=0){
+                    
                     link.options.forEach(function(option){
-                        debugger
+                        
                         _this.optionMap.series[0].data.forEach(function(e){
                             if(e.name == option.label){
-                                e.value = option.value;
+                                e.value += parseInt(option.value);
                             }
                         });
                     })
@@ -584,7 +571,7 @@ export default {
             this.initEchart(nodesList,linksList,keytext,frequencyText);
         },
         onSubmit : function(){
-            debugger
+            
             this.searchNode(this.search.searchKeys,this.search.frequency);
         }
     }
@@ -598,5 +585,8 @@ export default {
     width: 50%;
     text-align: center;
     margin: auto;
+}
+.formItem {
+    text-align: left;
 }
 </style>
